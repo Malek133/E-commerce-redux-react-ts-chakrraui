@@ -1,14 +1,22 @@
-import { Button, ButtonGroup, Card,Image,Text, CardBody, CardFooter, Divider, Heading, Stack } from "@chakra-ui/react"
+import { Button, ButtonGroup, Card,Image,Text, CardBody, 
+    CardFooter, Divider, Heading, Stack,
+     useColorMode, 
+     ColorModeContextType} from "@chakra-ui/react"
 
 
 const ProductCard = () => {
+   
+const  colorsMood: ColorModeContextType  = useColorMode();
+
+   
   return (
-    <Card maxW='sm'>
+    <Card border={'3px solid white'}>
     <CardBody>
       <Image
         src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
         alt='Green double couch with wooden legs'
-         borderRadius={'lg'}
+        // marginLeft={32}
+        //  borderRadius={'50%'} width={'150px'} height={'150px'}
       />
       <Stack mt='6' spacing='3'>
         <Heading size='md'>Living room Sofa</Heading>
@@ -25,10 +33,20 @@ const ProductCard = () => {
     <Divider />
     <CardFooter>
       <ButtonGroup spacing='2'>
-        <Button variant='solid' colorScheme='blue'>
+        <Button 
+        variant='solid' colorScheme='blue'
+        _hover={{
+            bg: colorsMood.colorMode === 'light' ? 'blue.50' : 'black',
+            color:colorsMood.colorMode === 'light' ? 'blue.50' : 'white'
+        }}>
           Buy now
         </Button>
-        <Button variant='ghost' colorScheme='blue'>
+        <Button 
+        _hover={{
+            bg: colorsMood.colorMode === 'light' ? 'blue.50' : 'black',
+            color:colorsMood.colorMode === 'light' ? 'blue.90' : 'white'
+        }}
+        variant='ghost' colorScheme='blue'>
           Add to cart
         </Button>
       </ButtonGroup>
