@@ -5,19 +5,6 @@ import { Button, ButtonGroup, Card, Image, Text,
  import { ReactElement } from "react";
 import { IProduct } from "../interface";
 
-// interface ProductAttributes {
-//   image?: {
-//     data?: {
-//         attributes?: {
-//         url?: string;
-//       };
-//     };
-//   };
-//   title?: string;
-//   descreption?: string;
-//   price?: number;
-// }
-
 
 const ProductCard = ({ attributes }: 
   { attributes: IProduct }): ReactElement => {

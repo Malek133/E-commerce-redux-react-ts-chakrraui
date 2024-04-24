@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard"
 import axios from "axios";
 import { IProduct } from "../interface";
 import { useQuery } from "react-query";
+import ProductSkelaton from "../components/ProductSkelaton";
 
 
 const ProductPage: React.FC = () => {
@@ -16,12 +17,18 @@ const ProductPage: React.FC = () => {
 
     const {isLoading,data} = useQuery('products', () => getProductList());
 
-    if(isLoading) return <div>Loading...</div>;
+    if(isLoading) return <Grid margin={10}  
+    templateColumns='repeat(auto-fill,minmax(300px,1fr) )' gap={6}>{
+      Array.from({length:10},((_,i)=>
+         <ProductSkelaton key={i} />)
+    )}</Grid>;
 
  
     if (!data) return <div>No data available</div>;
 
   return (
+   
+    
     <Grid margin={10} 
     templateColumns='repeat(auto-fill,minmax(300px,1fr) )' gap={6}>
         {
@@ -31,9 +38,9 @@ const ProductPage: React.FC = () => {
            ) )
 
         }
-    
-    
     </Grid>
+    
+
   )
 }
 
