@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Aboute from './pages/Aboute'
 import ProductPage from './pages/Product'
 import Navbar from './components/Navbar'
+import ProductDetails from './pages/ProductDetails'
 
 function App() {
   
@@ -16,6 +17,8 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/aboute" element={<Aboute />} />
       <Route path="/product" element={<ProductPage />} />
+      <Route path="/product/:id" element={<ProductDetails />} />
+
      </Routes>
     </>
   )
