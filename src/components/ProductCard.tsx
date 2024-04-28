@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Card, Image, Text,
   ColorModeContextType, Flex } from "@chakra-ui/react";
  import { ReactElement } from "react";
 import { IProduct } from "../interface";
-import { useParams } from "react-router-dom";
+//  import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 
@@ -12,17 +12,17 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ attributes }: 
   { attributes: IProduct }): ReactElement => {
 
-    const {id}=useParams();
+    // const {id}=useParams(); 
 
   const { colorMode }: ColorModeContextType = useColorMode();
 
   return (
-    <Card border={'3px solid white'}>
+    <Card border={`1px solid ${colorMode === 'light' ? 'black' : 'white'}`}>
       <CardBody>
         <Image
           src={`${import.meta.env.VITE_SERVER_URL}${attributes?.image?.data?.attributes?.url}`}
           alt='Green double couch with wooden legs'
-          height={'200px'}
+          height={'300px'}
         />
         <Stack mt='6' spacing='3'>
           <Flex justifyContent={"space-between"} alignItems="center">
@@ -41,13 +41,13 @@ const ProductCard = ({ attributes }:
       <Divider />
       <CardFooter>
         <ButtonGroup spacing='2'>
-        <Link to={`/product/${id}`}>
+        <Link to={`/product/${attributes.id}`}>
   <Button
     variant='solid'
     colorScheme='blue'
     _hover={{
-      bg: colorMode === 'light' ? 'blue.50' : 'black',
-      color: colorMode === 'light' ? 'blue.50' : 'white'
+      bg: colorMode === 'light' ? 'black' : 'white',
+      color: colorMode === 'light' ? 'white' : 'black'
     }}>
     Details Product
   </Button>
@@ -55,8 +55,8 @@ const ProductCard = ({ attributes }:
 
           <Button
             _hover={{
-              bg: colorMode === 'light' ? 'blue.50' : 'black',
-              color: colorMode === 'light' ? 'blue.90' : 'white'
+              bg: colorMode === 'light' ? 'black' : 'white',
+              color: colorMode === 'light' ? 'white' : 'black'
             }}
             variant='solid' colorScheme='blue'>
             Add to cart

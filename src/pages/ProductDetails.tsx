@@ -9,13 +9,17 @@ import { ReactElement, useEffect } from "react";
 
 const ProductDetails = (): ReactElement => {
     const {id} = useParams();
+    console.log(id)
+   
     const navigate = useNavigate()
     const { colorMode }: ColorModeContextType = useColorMode();
 
     const getProductList = async () =>{
-        const {data} = await 
+      
+         const {data} = await 
         axios.get(`${import.meta.env.VITE_SERVER_URL}/api/products/${id}?populate=image,categories`);
         return data;
+       
       } 
 
       const {isLoading,data} = useQuery(['products',id],

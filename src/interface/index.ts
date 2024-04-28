@@ -10,7 +10,7 @@ export interface IProduct {
   title?: string;
   descreption?: string;
   price?: number;
-  id:string
+   id:string
   }  
 
 
