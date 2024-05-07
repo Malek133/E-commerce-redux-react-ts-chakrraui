@@ -6,15 +6,23 @@ import { Button, ButtonGroup, Card, Image, Text,
 import { IProduct } from "../interface";
 //  import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addTocart } from "../app/feauture/CartSlice";
 
 
 
 const ProductCard = ({ attributes }: 
   { attributes: IProduct }): ReactElement => {
 
+     const dispatch = useDispatch();
     // const {id}=useParams(); 
 
   const { colorMode }: ColorModeContextType = useColorMode();
+
+  const addToCartHandler = () =>{
+   
+    dispatch( addTocart(attributes))
+  }
 
   return (
     <Card border={`1px solid ${colorMode === 'light' ? 'black' : 'white'}`}>
@@ -54,6 +62,7 @@ const ProductCard = ({ attributes }:
 </Link>
 
           <Button
+          onClick={addToCartHandler}
             _hover={{
               bg: colorMode === 'light' ? 'black' : 'white',
               color: colorMode === 'light' ? 'white' : 'black'

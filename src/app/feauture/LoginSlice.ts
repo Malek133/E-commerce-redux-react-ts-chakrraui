@@ -1,47 +1,3 @@
-// import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
-// import { axiosInstance } from "../../api/ConfigueAxios";
-
-// const initialeState = {
-//     loading: false,
-//     data: null,
-//     error: null,
-// }
-
-// export const  userLogin = createAsyncThunk("login/userLogin",async (_,thunkAPI) =>{
-
-//     const {rejectWithValue}= thunkAPI;
-
-//     try {
-//         const {data}= await axiosInstance.get(`/api/auth/local`);
-//         return data;
-//     } catch (error) {
-//         return rejectWithValue(error)
-//     }
-// })
-
-// const LoginSlice = createSlice({
-//     initialeState,
-//     name:"login",
-//     extraReducers:{
-//         [userLogin.pending]:(state)=>{
-//             state.loading=true;
-//            },
-//            [userLogin.fulfilled]:(state,action) =>{
-//             state.loading=false;
-//             state.data= action.payload;
-//             state.error=null
-//            },
-//            [userLogin.rejected]:(state,action)=> {
-//                state.loading=false;
-//                state.data=[] ;
-//                state.error=action.payload
-//            }
-//        } ,
-// })
-
-// export const selectLogin =({login}) => login
-
-// export default  LoginSlice.reducer;
 
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../api/ConfigueAxios";
@@ -50,14 +6,15 @@ import CookiesService from "../../srvices/CookiesService";
 
 interface LoginState {
     loading: boolean;
-    data:null; // Remplacez 'any' par le type approprié de vos données
-    error: null; // Remplacez 'any' par le type approprié de l'erreur
-}
+    data:null; 
+    error: null; 
+} 
 
 const initialState: LoginState = {
     loading: false,
     data: null,
     error: null,
+   
 }
 
 const {toast} = createStandaloneToast()
@@ -78,11 +35,14 @@ const loginSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+
+        type NewType = WritableDraft<LoginState>;
+
         builder
             .addCase(userLogin.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(userLogin.fulfilled, (state, action: PayloadAction) => {
+            .addCase(userLogin.fulfilled, (state:NewType, action: PayloadAction) => {
                 state.loading = false;
                 state.data = action.payload;
 
@@ -100,10 +60,11 @@ const loginSlice = createSlice({
                   })
                
             })
-            .addCase(userLogin.rejected, (state, action: PayloadAction) => {
+            .addCase(userLogin.rejected, (state: NewType, action: PayloadAction) => {
                 state.loading = false;
                 state.data = null; // Mettez à jour le contenu en conséquence
                 state.error = action.payload;
+                
                 toast({
                     title: action.payload.response.data.error.message,
                     description: "We've created your account for you.",
@@ -111,6 +72,7 @@ const loginSlice = createSlice({
                     duration: 4000,
                     isClosable: true,
                   })
+               
             });
     },
 });
